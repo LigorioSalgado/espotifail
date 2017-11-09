@@ -16,3 +16,6 @@ class Album(models.Model):
     country = models.CharField(max_length=100, choices=settings.COUNTRIES)
     price = models.DecimalField(decimal_places=2, max_digits=5)
     currency = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name

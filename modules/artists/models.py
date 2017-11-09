@@ -24,7 +24,7 @@ class Artist(models.Model):
     name = models.CharField(max_length=100)
     biography = models.TextField()
     photo = models.URLField()
-    albums = models.ManyToManyField(Album)
+    albums = models.ManyToManyField(Album, blank=True)
     is_band = models.BooleanField(default=False)
     primary_genre = models.CharField(max_length=100, choices=GENRES)
 

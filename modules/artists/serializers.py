@@ -11,5 +11,5 @@ class ArtistsModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         #fields = ('id', 'name', 'biography', 'photo', 'albums', 'is_band')
-        fields = ('__all__',)
+        fields = ('__all__')
         #exclude = ('primary_genre',)

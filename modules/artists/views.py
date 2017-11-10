@@ -31,7 +31,7 @@ class DetailArtist(APIView):
 
     def _get_artist(self, id):
         try:
-            artist = Artist.objects.get(id=id)
+            artist = Artist.objects.get(pk=id)
             return artist
         except Artist.DoesNotExist:
             raise Http404

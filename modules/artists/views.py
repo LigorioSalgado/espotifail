@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from .models import Artist
 from .serializers import ArtistsModelSerializer
 from django.http import Http404
+
 # Create your views here.
 
 
@@ -37,7 +38,7 @@ class DetailArtist(APIView):
             raise Http404
 
     def get(self, request, id):
-        artist = self._get_artist(id)
+        artist = get_object_or_404(Artist, pk=id)
         serializer = ArtistsModelSerializer(artist)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .models import Artist
 from .serializers import ArtistsModelSerializer
 from django.http import Http404
+from django.db.models import Q
 
 # Create your views here.
 
@@ -14,10 +15,27 @@ class ListArtist(APIView):
     Este endpoint trae todos los artistas
     '''
 
+    def _filterring(self, params):
+        genre = params.get('genre', "")
+        band = params.get('band', False)
+        name = params.get('name', "")
+
+        queryset = Artist.objects.filter(Q(primary_genre__iexact=genre)
+                                         & Q(is_band=band) & Q(name__istartswith=name))
+
+        print(queryset.query)
+        return queryset
+
     def get(self, request):
-        artists = Artist.objects.all()
-        serializer = ArtistsModelSerializer(artists, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        if request.query_params:
+            query = self._filterring(request.query_params)
+            serializer = ArtistsModelSerializer(query, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            artists = Artist.objects.all()
+            serializer = ArtistsModelSerializer(artists, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         serializer = ArtistsModelSerializer(data=request.data)

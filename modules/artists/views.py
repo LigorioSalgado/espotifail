@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from .models import Artist
 from .serializers import ArtistsModelSerializer
 from django.http import Http404
-
+from rest_framework.permissions import IsAuthenticated
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 # Create your views here.
 
 
@@ -13,6 +14,7 @@ class ListArtist(APIView):
     '''
     Este endpoint trae todos los artistas
     '''
+    permission_classes = (IsAuthenticated, TokenHasReadWriteScope)
 
     def get(self, request):
         artists = Artist.objects.all()

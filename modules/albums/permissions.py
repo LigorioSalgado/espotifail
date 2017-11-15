@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 
 
 class GroupAPermissions(BasePermission):
+    message = 'Tu usuario no es del grupo A'
 
     def _is_in_group(self, group_name, user):
         return Group.objects.get(name=group_name).user_set.filter(id=user.id).exists()

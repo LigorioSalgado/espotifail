@@ -11,7 +11,7 @@ class TrackViewSet(viewsets.ModelViewSet):
 
     serializer_class = TrackModelSerializer
     queryset = Track.objects.all().select_related('album')
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     filter_backends = (filters.SearchFilter, DjangoFilterBackend)
     filter_fields = ('raiting', 'duration')
     search_fields = ('name', 'album__name')

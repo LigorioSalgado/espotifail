@@ -8,6 +8,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TrackViewSet(viewsets.ModelViewSet):
+    "Endpoint que trae todos los tracks"
 
     serializer_class = TrackModelSerializer
     queryset = Track.objects.all().select_related('album')

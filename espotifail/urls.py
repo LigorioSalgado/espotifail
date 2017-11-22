@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^api/v1/', include('modules.artists.urls', namespace="artists")),
     url(r'^api/v1/', include('modules.albums.urls', namespace="albums")),
     url(r'^api/v1/', include('modules.tracks.urls', namespace="tracks")),
-    url(r'^api/v1/auth/', obtain_jwt_token, name="auth")
+    url(r'^api/v1/auth/', obtain_jwt_token, name="auth"),
+    url(r'^api/v1/docs/', include('rest_framework_docs.urls')),
 
 
 
